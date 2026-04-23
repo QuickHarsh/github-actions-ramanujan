@@ -6,12 +6,11 @@ on:
 jobs:
   print:
     runs-on: macos-latest
-    steps:
-      - name: Print Hello
-        run: echo "Hello World"
-
-  second-job:
-    runs-on: macos-latest
-    steps:
-      - name: Print Second Message
-        run: echo "This is the second job"
+    defaults:
+      run:
+        working-directory: backend
+        steps:
+          - name: Install Dependencies
+            run: npm ci
+          - name: Run test
+            run: npm test
